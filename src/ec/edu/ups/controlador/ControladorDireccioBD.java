@@ -68,38 +68,42 @@ public class ControladorDireccioBD {
             System.out.println(sql);
             Statement sta=miBaseDatos.getConexionBD().createStatement();
             ResultSet resultado=sta.executeQuery(sql);
+            while(resultado.next()){
             direccion.setCodigo(resultado.getInt("DIR_CODIGO"));
             direccion.setCallePrincipal(resultado.getString("DIR_CALLE_PRINCIPAL"));
             direccion.setCalleSecundaria(resultado.getString("DIR_CALLE_SECUNDARIA"));
             direccion.setNumero(resultado.getInt("DIR_NUMERO"));
-            return direccion;
+            }
+            miBaseDatos.desconectar();
         } catch (SQLException ex) {
             Logger.getLogger(ControladorPersonasBD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return direccion;
     }
     
     public List<Direccion> listaDireccion(){
+        List<Direccion> listallenado=new ArrayList<>();
         try {
-            List<Direccion> listadoDireccion = new ArrayList<>();
+            String sql="SELECT * FROM \"DIRECCIONES\";";
+            System.out.println(sql);
             miBaseDatos.conectar();
-            
-            Statement sta = miBaseDatos.getConexionBD().createStatement();
-            String sql = "SELECT * FROM \"DIRECCIONES\";";
-            ResultSet respuesta = sta.executeQuery(sql);
-            miBaseDatos.desconectar();
-            while(respuesta.next()){
-                Direccion d=new Direccion();
-                d.setCodigo(respuesta.getInt(1));
-                d.setCallePrincipal(respuesta.getString(2));
-                d.setCalleSecundaria(respuesta.getString(3));
-                d.setNumero(respuesta.getInt(4));
-                listadoDireccion.add(d);
+            System.out.println(sql);
+            Statement sta=miBaseDatos.getConexionBD().createStatement();
+            ResultSet resultado=sta.executeQuery(sql);
+            while(resultado.next()){
+            Direccion direccion=new Direccion();
+            direccion.setCodigo(resultado.getInt("DIR_CODIGO"));
+            direccion.setCallePrincipal(resultado.getString("DIR_CALLE_PRINCIPAL"));
+            direccion.setCalleSecundaria(resultado.getString("DIR_CALLE_SECUNDARIA"));
+            direccion.setNumero(resultado.getInt("DIR_NUMERO"));
+            direccion.setCedula(resultado.getString("PER_CEDULA"));
+            listallenado.add(direccion);
             }
+            miBaseDatos.desconectar();
         } catch (SQLException ex) {
-            
+            Logger.getLogger(ControladorPersonasBD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return listaDireccion();
+        return listallenado;
     }
     
     public void deleteDireccion(String cedula){

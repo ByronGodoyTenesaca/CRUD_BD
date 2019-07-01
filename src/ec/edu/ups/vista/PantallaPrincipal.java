@@ -105,6 +105,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jMenu1.add(jMenuItem3);
 
         jMenuItem4.setText("Actualizar");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem4);
 
         jMenuItem5.setText("Eliminar");
@@ -220,6 +225,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         eliminarDireccion.setVisible(true);
         desktopPane.add(eliminarDireccion);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        desktopPane.removeAll();
+        desktopPane.repaint();
+        ActualizarDireccion actualizarDireccion=new ActualizarDireccion(controladorDireccionesBD);
+        actualizarDireccion.setVisible(true);
+        desktopPane.add(actualizarDireccion);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     public static void main(String args[]) {
         

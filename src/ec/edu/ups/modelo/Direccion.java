@@ -6,6 +6,7 @@ public class Direccion {
     private String callePrincipal;
     private String calleSecundaria;
     private int numero;
+    private String cedula;
    
 
     public Direccion() {
@@ -19,7 +20,15 @@ public class Direccion {
         
     }
 
-   
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    
     public int getCodigo() {
         return codigo;
     }

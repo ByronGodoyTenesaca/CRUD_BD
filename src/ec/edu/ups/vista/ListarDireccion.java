@@ -21,17 +21,17 @@ public class ListarDireccion extends javax.swing.JInternalFrame {
     /**
      * Creates new form ListarDireccion
      */
-    ControladorDireccioBD controladorPersonasBD;
-    public ListarDireccion(ControladorDireccioBD controladorPersonasBD) {
+    ControladorDireccioBD controladorDireccioBD;
+    public ListarDireccion(ControladorDireccioBD controladorDireccioBD) {
         initComponents();
-        this.controladorPersonasBD=controladorPersonasBD;
+        this.controladorDireccioBD=controladorDireccioBD;
         llenado();
     }
 
     public void llenado(){
         
         DefaultTableModel modelo = (DefaultTableModel) tblListar.getModel();
-        List<Direccion> listadoDireccion = controladorPersonasBD.listaDireccion();
+        List<Direccion> listadoDireccion = controladorDireccioBD.listaDireccion();
         
         for (int i = 0; i < listadoDireccion.size(); i++) {
             Direccion d = listadoDireccion.get(i);
@@ -39,7 +39,7 @@ public class ListarDireccion extends javax.swing.JInternalFrame {
                     d.getCallePrincipal(),
                     d.getCalleSecundaria(),
                     d.getNumero(),
-                    
+                    d.getCedula()
             };
             modelo.addRow(datos);
         }
