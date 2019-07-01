@@ -26,11 +26,17 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         saveAsMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         fileMenu.setMnemonic('f');
-        fileMenu.setText("archivo");
+        fileMenu.setText("Personas");
 
         openMenuItem.setMnemonic('o');
         openMenuItem.setText("Crear");
@@ -77,6 +83,30 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         fileMenu.add(jMenuItem1);
 
         menuBar.add(fileMenu);
+
+        jMenu1.setText("Direcciones");
+
+        jMenuItem2.setText("Crear");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
+        jMenuItem3.setText("Buscar");
+        jMenu1.add(jMenuItem3);
+
+        jMenuItem4.setText("Actualizar");
+        jMenu1.add(jMenuItem4);
+
+        jMenuItem5.setText("Eliminar");
+        jMenu1.add(jMenuItem5);
+
+        jMenuItem6.setText("listar");
+        jMenu1.add(jMenuItem6);
+
+        menuBar.add(jMenu1);
 
         setJMenuBar(menuBar);
 
@@ -142,6 +172,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         desktopPane.add(listarPersona);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        desktopPane.removeAll();
+        desktopPane.repaint();
+        CrearDireccion creard=new CrearDireccion(controladorPersona);
+        creard.setVisible(true);
+        desktopPane.add(creard);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     public static void main(String args[]) {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -155,7 +193,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem saveAsMenuItem;

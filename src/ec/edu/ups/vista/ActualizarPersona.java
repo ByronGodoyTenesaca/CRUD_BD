@@ -204,7 +204,7 @@ public class ActualizarPersona extends javax.swing.JInternalFrame {
         persona.setNombre(txtNombre.getText());
         persona.setApellido(txtApellido.getText());
         persona.setEdad(Integer.parseInt(txtedad.getText()));
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         Date fecha;
         try {
             fecha = formato.parse(txtFecha.getText());

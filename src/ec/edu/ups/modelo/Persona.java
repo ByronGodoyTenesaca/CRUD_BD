@@ -95,13 +95,8 @@ public class Persona {
     }
 
     public void setCelular(String celular) {
-        if(celular.length()>10){
-            this.celular = celular.substring(0, 10);
-        }else{
-            for(int i=celular.length();i<10;i++){
-                this.celular = celular+" ";
-            }
-        }
+      this.celular = celular;
+         
     }
 
     public double getSalario() {

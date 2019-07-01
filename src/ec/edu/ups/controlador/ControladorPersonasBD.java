@@ -7,6 +7,9 @@ import java.sql.Statement;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -26,7 +29,7 @@ public class ControladorPersonasBD {
     public void create(Persona persona){
          Format formato = new SimpleDateFormat("yyyy-MM-dd");
         String fecha = formato.format(persona.getFechaNacimiento());
-        String sql= "INSERT INTO \"PERSONA\" VALUES ("+"'"+persona.getCedula()+"','"
+        String sql= "INSERT INTO \"PERSONAS\" VALUES ("+"'"+persona.getCedula()+"','"
                 +persona.getNombre()+"','"
                 +persona.getApellido()
                 +"',"+persona.getEdad()
@@ -46,7 +49,7 @@ public class ControladorPersonasBD {
     
     public void delete(String cedula){
         try {
-            String sql= "DELETE FROM \"PERSONA\" WHERE \"PER_CEDULA\"='"+cedula+"';";
+            String sql= "DELETE FROM \"PERSONAS\" WHERE \"PER_CEDULA\"='"+cedula+"';";
             
             miBaseDatos.conectar();
             
@@ -61,7 +64,7 @@ public class ControladorPersonasBD {
     public void update(Persona persona){
         Format formato = new SimpleDateFormat("yyyy-MM-dd");
         String fecha = formato.format(persona.getFechaNacimiento());
-        String sql="UPDATE \"PERSONA\" SET \"PER_NOMBRES\" = '" + persona.getNombre() + "',"
+        String sql="UPDATE \"PERSONAS\" SET \"PER_NOMBRES\" = '" + persona.getNombre() + "',"
                  + "\"PER_APELLIDOS\" = '" + persona.getApellido() + "',"
                 + "\"PER_EDAD\" = " + persona.getEdad() + ","
                 + "\"PER_FECHA_NACIMIENTO\" = '" + fecha + "',"
@@ -69,7 +72,7 @@ public class ControladorPersonasBD {
                 + "\"PER_SALARIO\" = " + persona.getSalario()
                 + "WHERE \"PER_CEDULA\" = '" + persona.getCedula() + "';";
         miBaseDatos.conectar();
-        
+        System.out.println(sql);
         try{
         Statement sta=miBaseDatos.getConexionBD().createStatement();
         sta.execute(sql);
@@ -85,7 +88,7 @@ public class ControladorPersonasBD {
         miBaseDatos.conectar();
         try {
             Statement sta = miBaseDatos.getConexionBD().createStatement();
-            String sql = "SELECT * FROM \"PERSONA\";";
+            String sql = "SELECT * FROM \"PERSONAS\";";
             ResultSet respuesta = sta.executeQuery(sql);
             while(respuesta.next()){
                 Persona p = new Persona();
@@ -109,7 +112,7 @@ public class ControladorPersonasBD {
         miBaseDatos.conectar();
         try {
             Statement sta = miBaseDatos.getConexionBD().createStatement();
-            String sql = "SELECT * FROM \"PERSONA\" WHERE \"PER_CEDULA\"='"+cedula+"';";
+            String sql = "SELECT * FROM \"PERSONAS\" WHERE \"PER_CEDULA\"='"+cedula+"';";
             ResultSet respuesta = sta.executeQuery(sql);
             while(respuesta.next()){
                 p.setCedula(respuesta.getString(1));
@@ -125,5 +128,26 @@ public class ControladorPersonasBD {
             ex.printStackTrace();
         }
         return p;
+    }
+    
+    public void llenarCedulas(JComboBox cedulas){
+       
+        try {
+            String sql="SELECT * FROM \"PERSONAS\";";
+            
+            miBaseDatos.conectar();
+            Statement sta=miBaseDatos.getConexionBD().createStatement();
+            ResultSet respuesta =sta.executeQuery(sql);
+            
+            cedulas.addItem("Elija una opcion");
+            
+            while(respuesta.next()){
+                cedulas.addItem(respuesta.getString("PER_CEDULA"));
+            }
+            miBaseDatos.desconectar();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+       
     }
 }
