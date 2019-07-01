@@ -6,6 +6,7 @@ public class Direccion {
     private String callePrincipal;
     private String calleSecundaria;
     private int numero;
+   
 
     public Direccion() {
     }
@@ -15,8 +16,10 @@ public class Direccion {
         this.callePrincipal = callePrincipal;
         this.calleSecundaria = calleSecundaria;
         this.numero = numero;
+        
     }
 
+   
     public int getCodigo() {
         return codigo;
     }

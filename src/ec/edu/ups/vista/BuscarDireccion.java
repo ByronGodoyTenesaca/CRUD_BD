@@ -5,6 +5,10 @@
  */
 package ec.edu.ups.vista;
 
+
+import ec.edu.ups.controlador.ControladorDireccioBD;
+import ec.edu.ups.modelo.Direccion;
+
 /**
  *
  * @author Usuario
@@ -14,8 +18,10 @@ public class BuscarDireccion extends javax.swing.JInternalFrame {
     /**
      * Creates new form CrearDireccion
      */
-    public BuscarDireccion() {
+    ControladorDireccioBD conexionBD;
+    public BuscarDireccion(ControladorDireccioBD conexionBD) {
         initComponents();
+        this.conexionBD=conexionBD;
     }
 
     /**
@@ -41,7 +47,7 @@ public class BuscarDireccion extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Crear Direccion", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 2, 18))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar Direccion", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 2, 18))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Arial", 3, 18)); // NOI18N
         jLabel1.setText("cedula:");
@@ -59,7 +65,12 @@ public class BuscarDireccion extends javax.swing.JInternalFrame {
         jLabel5.setText("numero:");
 
         jButton1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jButton1.setText("crear");
+        jButton1.setText("buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jButton2.setText("cancelar");
@@ -146,6 +157,15 @@ public class BuscarDireccion extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Direccion direccion=conexionBD.buscarDireccion(txtCedula.getText());
+        txtCalleP.setText(direccion.getCallePrincipal());
+        txtCalleS.setText(direccion.getCalleSecundaria());
+        txtCodigo.setText(String.valueOf(direccion.getCodigo()));
+        txtNumero.setText(String.valueOf(direccion.getNumero()));
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

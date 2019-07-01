@@ -5,7 +5,9 @@
  */
 package ec.edu.ups.vista;
 
-import ec.edu.ups.controlador.ControladorPersonasBD;
+
+import ec.edu.ups.controlador.ControladorDireccioBD;
+import ec.edu.ups.modelo.Direccion;
 
 /**
  *
@@ -13,8 +15,8 @@ import ec.edu.ups.controlador.ControladorPersonasBD;
  */
 public class CrearDireccion extends javax.swing.JInternalFrame {
 
-    ControladorPersonasBD controladorPersonasBD;
-    public CrearDireccion(ControladorPersonasBD controladorPersonasBD) {
+    ControladorDireccioBD controladorPersonasBD;
+    public CrearDireccion(ControladorDireccioBD controladorPersonasBD) {
         initComponents();
         this.controladorPersonasBD=controladorPersonasBD;
         this.controladorPersonasBD.llenarCedulas(cbxLista);
@@ -34,7 +36,7 @@ public class CrearDireccion extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         txtNumero = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnCrear = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         cbxLista = new javax.swing.JComboBox<>();
 
@@ -55,8 +57,13 @@ public class CrearDireccion extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Arial", 3, 18)); // NOI18N
         jLabel5.setText("numero:");
 
-        jButton1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jButton1.setText("crear");
+        btnCrear.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnCrear.setText("crear");
+        btnCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jButton2.setText("cancelar");
@@ -86,7 +93,7 @@ public class CrearDireccion extends javax.swing.JInternalFrame {
                             .addComponent(cbxLista, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(77, 77, 77)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(89, 89, 89)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(27, Short.MAX_VALUE))
@@ -117,7 +124,7 @@ public class CrearDireccion extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22))
         );
 
@@ -141,10 +148,27 @@ public class CrearDireccion extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+        Direccion direccion=new Direccion();
+        direccion.setCallePrincipal(txtCalleP.getText());
+        direccion.setCalleSecundaria(txtCalleS.getText());
+        direccion.setCodigo(Integer.parseInt(txtCodigo.getText()));
+        direccion.setNumero(Integer.parseInt(txtNumero.getText()));
+        String cedula=cbxLista.getSelectedItem().toString();
+        
+        
+        controladorPersonasBD.crearDireccion(direccion, cedula);
+        txtCalleP.setText("");
+        txtCalleS.setText("");
+        txtCodigo.setText("");
+        txtNumero.setText("");
+        cbxLista.setSelectedIndex(0);
+    }//GEN-LAST:event_btnCrearActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCrear;
     private javax.swing.JComboBox<String> cbxLista;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

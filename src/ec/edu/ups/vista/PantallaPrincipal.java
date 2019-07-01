@@ -2,15 +2,17 @@
 package ec.edu.ups.vista;
 
 import ec.edu.ups.controlador.ControladorPersonasBD;
+import ec.edu.ups.controlador.ControladorDireccioBD;
 
 
 public class PantallaPrincipal extends javax.swing.JFrame {
 
     ControladorPersonasBD controladorPersona;
+    ControladorDireccioBD controladorDireccionesBD;
     public PantallaPrincipal() {
         initComponents();
         controladorPersona = new ControladorPersonasBD();
-       
+       controladorDireccionesBD=new ControladorDireccioBD();
     }
 
  
@@ -95,15 +97,30 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setText("Buscar");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jMenuItem4.setText("Actualizar");
         jMenu1.add(jMenuItem4);
 
         jMenuItem5.setText("Eliminar");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem5);
 
         jMenuItem6.setText("listar");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem6);
 
         menuBar.add(jMenu1);
@@ -175,10 +192,34 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         desktopPane.removeAll();
         desktopPane.repaint();
-        CrearDireccion creard=new CrearDireccion(controladorPersona);
+        CrearDireccion creard=new CrearDireccion(controladorDireccionesBD);
         creard.setVisible(true);
         desktopPane.add(creard);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        desktopPane.removeAll();
+        desktopPane.repaint();
+        BuscarDireccion buscarDireccion=new BuscarDireccion(controladorDireccionesBD);
+        buscarDireccion.setVisible(true);
+        desktopPane.add(buscarDireccion);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        desktopPane.removeAll();
+        desktopPane.repaint();
+        ListarDireccion direccion=new ListarDireccion(controladorDireccionesBD);
+        direccion.setVisible(true);
+        desktopPane.add(direccion);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        desktopPane.removeAll();
+        desktopPane.repaint();
+        EliminarDireccion eliminarDireccion=new EliminarDireccion(controladorDireccionesBD);
+        eliminarDireccion.setVisible(true);
+        desktopPane.add(eliminarDireccion);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     public static void main(String args[]) {
         

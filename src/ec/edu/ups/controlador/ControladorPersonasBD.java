@@ -1,5 +1,6 @@
 package ec.edu.ups.controlador;
 
+import ec.edu.ups.modelo.Direccion;
 import ec.edu.ups.modelo.Persona;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,6 +8,7 @@ import java.sql.Statement;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
@@ -130,24 +132,9 @@ public class ControladorPersonasBD {
         return p;
     }
     
-    public void llenarCedulas(JComboBox cedulas){
-       
-        try {
-            String sql="SELECT * FROM \"PERSONAS\";";
-            
-            miBaseDatos.conectar();
-            Statement sta=miBaseDatos.getConexionBD().createStatement();
-            ResultSet respuesta =sta.executeQuery(sql);
-            
-            cedulas.addItem("Elija una opcion");
-            
-            while(respuesta.next()){
-                cedulas.addItem(respuesta.getString("PER_CEDULA"));
-            }
-            miBaseDatos.desconectar();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-       
-    }
+   
+    
+   
+    
+    
 }
